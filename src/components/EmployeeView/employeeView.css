@@ -1,0 +1,13 @@
+.emp-display-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.emp-display-field h4 {
+  flex-basis: 50%;
+}
+
+.text-left {
+  text-align: left;
+}

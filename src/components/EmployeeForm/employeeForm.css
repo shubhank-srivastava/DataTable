@@ -1,0 +1,10 @@
+.emp-form-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emp-form-field input {
+  padding: 5px;
+}
