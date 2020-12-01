@@ -133,8 +133,8 @@ class DataTable {
     let filteredRows = this.dataView;
     if (this.searchFilters.size > 0) {
       for (let [key, val] of this.searchFilters) {
-        filteredRows = filteredRows.filter(
-          (v) => v[key].toString().indexOf(val) > -1
+        filteredRows = filteredRows.filter((v) =>
+          new RegExp(val, "ig").test(v[key].toString())
         );
       }
     }
@@ -152,6 +152,7 @@ class DataTable {
       this.config.key && tr.setAttribute("key", row[this.config.key]);
       tbody.appendChild(tr);
     }
+    this.createPages(filteredRows.length);
     if (this.tbody === null) {
       this.tbody = tbody;
       this.table.appendChild(this.tbody);
@@ -306,13 +307,13 @@ class DataTable {
     pagination.appendChild(dropdown);
     this.pagination = pagination;
     dropdown.addEventListener("change", () => {
+      this.page = 0;
       this.createTableBody();
-      this.createPages();
     });
     this.createPages();
   }
 
-  createPages() {
+  createPages(_totalPages) {
     let pagesDiv = document.createElement("div");
     if (this.page > 0) {
       let span = document.createElement("span");
@@ -320,9 +321,8 @@ class DataTable {
       span.setAttribute("page", this.page - 1);
       pagesDiv.appendChild(span);
     }
-    let totalPages = Math.ceil(
-      this.dataView.length / parseInt(this.selectedPageSize.value, 10)
-    );
+    let _tp = _totalPages || this.dataView.length;
+    let totalPages = Math.ceil(_tp / parseInt(this.selectedPageSize.value, 10));
     let i = this.page;
     let count = 0;
     while (i < totalPages && count < 5) {
@@ -355,13 +355,11 @@ class DataTable {
     if (page) {
       this.page = parseInt(page, 10);
       this.createTableBody();
-      this.createPages();
     }
   }
 
   render() {
     if (this.table) {
-      this.createPages();
       this.createTableBody();
     } else {
       let tableDiv = document.createElement("div");
