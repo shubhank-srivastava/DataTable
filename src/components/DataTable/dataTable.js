@@ -248,19 +248,19 @@ class DataTable {
       } else if (!c.sortOrder || c.sortOrder === "asc") {
         if (!c.sortOrder) {
           c.sortOrder = "asc";
-          sortEl.lastChild.opacity = 0.5;
-          sortEl.firstChild.opacity = 1;
+          sortEl.lastChild.style.opacity = 0.5;
+          sortEl.firstChild.style.opacity = 1;
         } else if (c.sortOrder === "asc") {
           c.sortOrder = "desc";
-          sortEl.lastChild.opacity = 1;
-          sortEl.firstChild.opacity = 0.5;
+          sortEl.lastChild.style.opacity = 1;
+          sortEl.firstChild.style.opacity = 0.5;
         }
         this.dataView = this.sortByType(this.config.data, c);
       } else if (c.sortOrder === "desc") {
         c.sortOrder = null;
         this.dataView = this.config.data;
-        sortEl.lastChild.opacity = 1;
-        sortEl.firstChild.opacity = 1;
+        sortEl.lastChild.style.opacity = 1;
+        sortEl.firstChild.style.opacity = 1;
       }
     });
     // this.createTableHeader();

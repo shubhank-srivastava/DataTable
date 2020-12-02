@@ -116,8 +116,15 @@ td {
 }
 
 .dt .pagination div > span {
-  margin: 4px;
+  margin: 2px;
   cursor: pointer;
+}
+
+.dt .pagination div > span[selected="true"] {
+  background-color: #42444e;
+  color: #fff;
+  padding-right: 2px;
+  padding-left: 2px;
 }
 
 .dt .pagination div > span:last-child {
